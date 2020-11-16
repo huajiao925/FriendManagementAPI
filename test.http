@@ -1,0 +1,68 @@
+GET http://localhost:3000
+#####
+GET http://localhost:3000/books/
+
+#####simple filter
+GET http://localhost:3000/books?published=2011&tags=Web
+
+####complex filter
+POST http://localhost:3000/books/filter
+Content-Type: application/json
+
+//{"tags": {"$in": ["NoSQL", "Database"]}}
+{"tags": {"$all": ["NoSQL", "Database"]}}
+
+####complex filter
+POST http://localhost:3000/books/filter?skip=3&limit=2
+Content-Type: application/json
+
+
+
+
+#####find by id
+GET http://localhost:3000/books/5f59cd91539a6139bced23dc
+
+
+####
+POST http://localhost:3000/books/
+Content-Type: application/json
+
+{
+    "tags": [
+      "jQuery",
+      "JavaScript",
+      "Programming",
+      "Web"
+    ],
+    "pages": 4592,
+    "title": "LL Boook",
+    "authors": [
+      {
+        "lastName": "Bear",
+        "firstName": "Bear"
+      }
+    ],
+    "published": 2010
+  }
+
+####
+PUT http://localhost:3000/books/5f59ce16539a6139bced23dd
+Content-Type: application/json
+
+{
+    "tags": [
+      "jQuery"
+    ],
+    "pages": 4,
+    "title": "LL Boook2",
+    "authors": [
+      {
+        "lastName": "Bear",
+        "firstName": "Bear"
+      }
+    ],
+    "published": 2010
+  }
+####
+DELETE  http://localhost:3000/books/5f59cebc6228ce5008c851d2
+Content-Type: application/json
