@@ -1,68 +1,68 @@
 GET http://localhost:3000
-#####
-GET http://localhost:3000/books/
+#####getallfriend
+GET http://localhost:3000/friend/
 
-#####simple filter
-GET http://localhost:3000/books?published=2011&tags=Web
 
-####complex filter
-POST http://localhost:3000/books/filter
-Content-Type: application/json
-
-//{"tags": {"$in": ["NoSQL", "Database"]}}
-{"tags": {"$all": ["NoSQL", "Database"]}}
-
-####complex filter
-POST http://localhost:3000/books/filter?skip=3&limit=2
-Content-Type: application/json
+GET http://localhost:3000/post/
 
 
 
 
-#####find by id
-GET http://localhost:3000/books/5f59cd91539a6139bced23dc
-
-
-####
-POST http://localhost:3000/books/
+####1. linkfriends
+PUT http://localhost:3000/friend/linkup
 Content-Type: application/json
 
 {
-    "tags": [
-      "jQuery",
-      "JavaScript",
-      "Programming",
-      "Web"
-    ],
-    "pages": 4592,
-    "title": "LL Boook",
-    "authors": [
-      {
-        "lastName": "Bear",
-        "firstName": "Bear"
-      }
-    ],
-    "published": 2010
-  }
+  "emails": [
+    "test@gmail.com",
+    "john9@example.com"
+  ]
+}
 
-####
-PUT http://localhost:3000/books/5f59ce16539a6139bced23dd
+
+####2. get all friends
+GET http://localhost:3000/friend/allFriends/test1@gmail.com
+
+
+####3. common friends
+POST http://localhost:3000/friend/commonFriends
 Content-Type: application/json
 
 {
-    "tags": [
-      "jQuery"
-    ],
-    "pages": 4,
-    "title": "LL Boook2",
-    "authors": [
-      {
-        "lastName": "Bear",
-        "firstName": "Bear"
-      }
-    ],
-    "published": 2010
-  }
-####
-DELETE  http://localhost:3000/books/5f59cebc6228ce5008c851d2
+  "emails": [
+    "test@gmail.com",
+    "test1@gmail.com"
+  ]
+}
+
+####4. subscribe
+PUT http://localhost:3000/friend/subscribe
 Content-Type: application/json
+
+{
+  "emails": [
+    "test@gmail.com",
+    "john9@example.com"
+  ]
+}
+
+
+
+####5. block
+PUT http://localhost:3000/friend/block
+Content-Type: application/json
+
+{
+  "emails": [
+    "test@gmail.com",
+    "john9@example.com"
+  ]
+}
+
+
+####6. get all subscribed emails
+GET http://localhost:3000/friend/allSubList/test1@gmail.com
+
+
+#### get post by email
+GET http://localhost:3000/post/allposts/test1@gmail.com

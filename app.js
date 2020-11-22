@@ -1,5 +1,6 @@
 require("dotenv").config();
-const bookRouter = require('./routers/bookRouter');
+const friendRouter = require('./routers/friendRouter');
+const postRouter = require('./routers/postRouter');
 const express = require("express");
 const { response } = require("express");
 const app = express();
@@ -12,7 +13,9 @@ console.log(process.env.DATABASE_URL);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/books", bookRouter);
+
+app.use("/friend", friendRouter);
+app.use("/post", postRouter);
 
 app.get('/', (request, response)=> {
     response.send('hello world');
