@@ -3,21 +3,20 @@ const router = express.Router();
 const Post = require('../models/post');
 
 //get all posts
-router.route('/').get(async(req, res)=>{
-    let filter = req.query;
-    await Post.find(filter, (err, post)=> {
-        if(err){
-            return res.status(500).send(err);
-        }
-        return res.json(post);
-    })
+router.route('/allpost').get((req, res)=>{
+    return res.json;
 })
 
 
-//get posts by email
-router.route('/allposts/:account').get(async(req, res)=>{
-    let list = await Post.find({sendFrom: req.params.account}, 'post').exec();
-    return res.send(list);
+router.route('/makeapost').post(async(req, res)=>{
+    var post = new Post(req.body);
+    post.save().then(item=> {
+        res.status(200).send("Post succeed.")
     })
+    .catch(error => {
+        res.status(400).send("Failed.")
+    })
+     
+})
 
 module.exports = router;

@@ -1,42 +1,31 @@
-GET http://localhost:3000
+GET http://localhost:3000/api
 #####getallfriend
-GET http://localhost:3000/friend/
-
-
-GET http://localhost:3000/post/
-
-
+GET http://localhost:3000/api/friend/
 
 
 ####1. linkfriends
-PUT http://localhost:3000/friend/linkup
+PUT http://localhost:3000/api/friend/linkup
 Content-Type: application/json
 
 {
-  "emails": [
+  "friends": [
     "test@gmail.com",
     "john9@example.com"
   ]
 }
 
-
 ####2. get all friends
-GET http://localhost:3000/friend/allFriends/test1@gmail.com
+GET http://localhost:3000/api/friend/allFriends/test343@gmail.com
 
 
 ####3. common friends
-POST http://localhost:3000/friend/commonFriends
+POST http://localhost:3000/api/friend/commonFriends
 Content-Type: application/json
 
-{
-  "emails": [
-    "test@gmail.com",
-    "test1@gmail.com"
-  ]
-}
+{"email1": "test1@gmail.com", "email2": "test@gmail.com"}
 
 ####4. subscribe
-PUT http://localhost:3000/friend/subscribe
+PUT http://localhost:3000/api/friend/subscribe
 Content-Type: application/json
 
 {
@@ -49,7 +38,7 @@ Content-Type: application/json
 
 
 ####5. block
-PUT http://localhost:3000/friend/block
+PUT http://localhost:3000/api/friend/block
 Content-Type: application/json
 
 {
@@ -61,8 +50,20 @@ Content-Type: application/json
 
 
 ####6. get all subscribed emails
-GET http://localhost:3000/friend/allSubList/test1@gmail.com
+GET http://localhost:3000/api/friend/allSubList/test1@gmail.com
 
 
-#### get post by email
-GET http://localhost:3000/post/allposts/test1@gmail.com
+
+#### 7. make a post  
+POST http://localhost:3000/api/post/makeapost
+Content-Type: application/json
+
+{
+  "sendFrom": "test1@gmail.com",
+  "receivedBy": "test2@gmail.com",
+  "post": "abcd"
+}
+
+
+#### 8. get all posts
+GET http://localhost:3000/api/post/allpost

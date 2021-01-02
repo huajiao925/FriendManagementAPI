@@ -15,10 +15,11 @@ router.route('/').get(async(req, res)=>{
     })
 })
 
+
 //1. create friends link 
 router.route('/linkup').put((req, res)=>{
-    let accountEmail = req.body['emails'][0];
-    let addEmail = req.body['emails'][1];
+    let accountEmail = req.body['friends'][0];
+    let addEmail = req.body['friends'][1];
     let isBlocked = false;
 
     Friend.exists({blockList: addEmail}, function(err, res){
@@ -48,14 +49,14 @@ router.route('/linkup').put((req, res)=>{
 //2. get all friends by email
 router.route('/allFriends/:account').get(async(req, res)=>{
     let list = await Friend.find({account: req.params.account}, 'friendList').exec();
-    return res.send(list);
+    return res.send(list[0].friendList);
     })
 
 //3. get common friends by 2 emails
 router.route('/commonFriends').post(async(req, res)=>{
     try{
-        const email1 = req.body['emails'][0];
-        const email2 = req.body['emails'][1];
+        const email1 = req.body['email1'];
+        const email2 = req.body['email2'];
         let commonEmails = await Friend.aggregate([
             {$match: {account: {$in: [email1, email2]}}},
             {$unwind: "$friendList"},
@@ -65,7 +66,7 @@ router.route('/commonFriends').post(async(req, res)=>{
             {$group: {_id: 0, commonFriend: {$push: "$_id"}}},
             {$project: {_id:0, commonFriend:"$commonFriend"}}
         ]).exec();
-        return res.send(commonEmails);
+        return res.send(commonEmails[0].commonFriend);
     }
     catch (err){
         return res.status(500).send(err);
@@ -111,7 +112,7 @@ router.route('/block').put(async(req, res)=>{
 //6. get all emails that can receive updates 
 router.route('/allSubList/:account').get(async(req, res)=>{
     let list = await Friend.find({account: req.params.account}, 'subList').exec();
-    return res.send(list);
+    return res.send(list[0].subList);
 })
 
 
