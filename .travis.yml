@@ -1,5 +1,5 @@
 language: node_js
 node_js:
-  - 7  
+  - 14 
 deploy:
   skip_cleanup: true
