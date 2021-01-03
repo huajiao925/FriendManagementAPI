@@ -5,7 +5,7 @@ deploy:
   provider: releases
   api_key: "d73851db70a0e7f175332661a7064c4d617afc1d"
   file_glob: true
-  file: src/*
+  file: routers/*
   skip_cleanup: true
   on:
     tags: true
