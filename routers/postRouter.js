@@ -26,7 +26,7 @@ router.route('/makeapost').post(async(req, res)=>{
             from: req.body['sendFrom'],
             to: req.body['receivedBy'],
             subject: 'Here is your daily post updates',
-            text: 'Update: ' + req.body['post'],,
+            text: 'Update: ' + req.body['post'],
         };
 
         cron.schedule('* * * * *', () => {
