@@ -4,3 +4,8 @@ node_js:
 deploy:
   skip_cleanup: true
 script: 'true'
+
+before_install:
+  - npm i -g npm@version-number
+cache:
+  npm: false
